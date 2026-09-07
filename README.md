@@ -1,1 +1,284 @@
 # Omars-Audio
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omar’s Audio Services | Professional Quote Request</title>
+    <style>
+        :root {
+            --bg-dark: #0a0e17;
+            --bg-card: #121824;
+            --primary: #00f0ff;
+            --primary-hover: #00b8cc;
+            --text-main: #ffffff;
+            --text-muted: #8a99ad;
+            --border: #1e293b;
+            --success: #00ff87;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 650px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 35px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 25px;
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 10px;
+        }
+
+        .bio {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: var(--text-main);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.2);
+        }
+
+        .conditional-section {
+            background: rgba(0, 240, 255, 0.03);
+            border: 1px dashed var(--border);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-transform: none;
+            letter-spacing: normal;
+        }
+
+        .checkbox-label input {
+            margin-right: 10px;
+            accent-color: var(--primary);
+        }
+
+        .estimate-box {
+            background: rgba(0, 255, 135, 0.05);
+            border: 1px solid rgba(0, 255, 135, 0.2);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .estimate-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        .estimate-amount {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--success);
+            margin: 5px 0;
+        }
+
+        .estimate-note {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        button {
+            width: 100%;
+            background: var(--primary);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 8px;
+            padding: 15px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        button:hover {
+            background: var(--primary-hover);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+        }
+
+        #successMessage {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .success-icon {
+            font-size: 3.5rem;
+            color: var(--success);
+            margin-bottom: 20px;
+        }
+
+        .success-text {
+            color: var(--text-muted);
+            margin-top: 15px;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="formContainer">
+        <header>
+            <h1>Omar’s Audio Services</h1>
+            <p class="bio">Providing studio-grade mixing and mastering, alongside professional residential, commercial, and precision car audio installations.</p>
+        </header>
+
+        <!-- Web3Forms Routing Point -->
+        <form action="https://web3forms.com" method="POST" id="quoteForm">
+            <input type="hidden" name="access_key" value="76069694-21c0-4fb9-94bb-9a37eef156c3">
+            <input type="hidden" name="subject" value="New Service Quote Request - Omar's Audio">
+            <input type="hidden" name="from_name" value="Omar's Audio Website">
+
+            <div class="form-group">
+                <label for="clientName">Your Name</label>
+                <input type="text" id="clientName" name="name" required placeholder="John Doe">
+            </div>
+
+            <div class="form-group">
+                <label for="serviceType">Select Required Service</label>
+                <select id="serviceType" name="service_type" required onchange="calculateEstimate()">
+                    <option value="" disabled selected>Choose a service...</option>
+                    <option value="music_production">Music Production (Mixing & Mastering)</option>
+                    <option value="car_audio">Car Audio Installation</option>
+                    <option value="home_commercial">Home / Commercial Audio System Design & Install</option>
+                </select>
+            </div>
+
+            <!-- Dynamic Section: Music Production -->
+            <div id="musicSection" class="conditional-section">
+                <div class="form-group">
+                    <label for="trackCount">Number of Audio Tracks in Session</label>
+                    <input type="number" id="trackCount" name="track_count" min="1" value="5" oninput="calculateEstimate()">
+                </div>
+                <div class="form-group">
+                    <label for="turnaround">Turnaround Timeline</label>
+                    <select id="turnaround" name="turnaround_timeline" onchange="calculateEstimate()">
+                        <option value="standard">Standard (2 Weeks)</option>
+                        <option value="rush_1week">Rush (1 Week) [+30% Fee]</option>
+                        <option value="rush_lessweek">Express (Less than 1 Week) [+50% Fee]</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Dynamic Section: Car Audio -->
+            <div id="carSection" class="conditional-section">
+                <div class="form-group" style="display: flex; gap: 10px;">
+                    <div style="flex: 1;">
+                        <label for="carMake">Make (Optional)</label>
+                        <input type="text" id="carMake" name="car_make" placeholder="e.g., Honda">
+                    </div>
+                    <div style="flex: 1;">
+                        <label for="carModel">Model (Optional)</label>
+                        <input type="text" id="carModel" name="car_model" placeholder="e.g., Civic">
+                    </div>
+                    <div style="flex: 1;">
+                        <label for="carYear">Year (Optional)</label>
+                        <input type="text" id="carYear" name="car_year" placeholder="e.g., 2022">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Components to Install</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label"><input type="checkbox" name="components[]" value="Head Unit"> Head Unit</label>
+                        <label class="checkbox-label"><input type="checkbox" name="components[]" value="Speakers"> Speakers</label>
+                        <label class="checkbox-label"><input type="checkbox" name="components[]" value="Subwoofer"> Subwoofer</label>
+                        <label class="checkbox-label"><input type="checkbox" name="components[]" value="Amplifier"> Amplifier</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label" style="background: transparent; border: none; padding: 0;">
+                        <input type="checkbox" name="sourcing_needed" value="Yes" style="accent-color: var(--primary);"> I need help sourcing hardware gear
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="projectDetails">Project Needs, Wants & End Result</label>
