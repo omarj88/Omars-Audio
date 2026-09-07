@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omar’s Audio Services - Professional Sound & Music Solutions</title>
+    <style>
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #131a26;
+            --accent: #00f0ff;
+            --accent-hover: #00c8d6;
+            --text-main: #f0f4f8;
+            --text-muted: #8a99ad;
+            --border: #1f2c3f;
+            --success: #00ff87;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 650px;
+            width: 100%;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 40px 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 35px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 25px;
+        }
+
+        h1 {
+            color: var(--accent);
+            font-size: 2.2rem;
+            letter-spacing: -0.5px;
+            margin-bottom: 10px;
+        }
+
+        .bio {
+            color: var(--text-muted);
+            font-size: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        select, input[type="text"], input[type="number"], textarea {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-main);
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        select:focus, input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .conditional-section {
+            display: none;
+            background-color: rgba(0, 240, 255, 0.03);
+            border: 1px dashed var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: -10px;
+            margin-bottom: 25px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: normal;
+            cursor: pointer;
+            color: var(--text-main);
+        }
+
+        .checkbox-label input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent);
+        }
+
+        .estimate-box {
+            background-color: rgba(0, 240, 255, 0.07);
+            border: 1px solid var(--accent);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .estimate-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .estimate-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .estimate-notice {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--accent);
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        button:hover {
+            background-color: var(--accent-hover);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        #success-message {
+            display: none;
+            text-align: center;
+            padding: 40px 10px;
+        }
+
+        #success-message h2 {
+            color: var(--success);
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        #success-message p {
+            color: var(--text-main);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        #success-message .timeframe {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="form-container">
+            <header>
+                <h1>Omar’s Audio Services</h1>
+                <p class="bio">Premium, high-fidelity car and venue sound installations built alongside precision studio-grade music production, mixing, and mastering services.</p>
+            </header>
+
+            <form id="quote-form" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="client-name">Your Name</label>
+                    <input type="text" id="client-name" required placeholder="John Doe">
+                </div>
+
+                <div class="form-group">
+                    <label for="service-type">Select Service Needed</label>
+                    <select id="service-type" required onchange="handleServiceChange()">
+                        <option value="" disabled selected>-- Choose a Service --</option>
+                        <option value="music-production">Music Production (Mixing & Mastering)</option>
+                        <option value="venue-install">Home & Commercial Audio System Installation</option>
+                        <option value="car-install">Car Audio Installation</option>
+                    </select>
+                </div>
+
+                <!-- Music Production Fields -->
+                <div id="music-fields" class="conditional-section">
+                    <div class="form-group">
+                        <label for="track-count">Number of Audio Tracks (Stems)</label>
+                        <input type="number" id="track-count" min="1" placeholder="e.g. 8, 24, 45" oninput="calculateEstimate()">
+                    </div>
+                    <div class="form-group">
+                        <label for="turnaround">Turnaround Time</label>
+                        <select id="turnaround" onchange="calculateEstimate()">
+                            <option value="standard" selected>Standard (2 Weeks)</option>
+                            <option value="rush-week">Rush (1 Week) [+30% Fee]</option>
+                            <option value="rush-express">Express (Less than 1 Week) [+50% Fee]</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Car Audio Fields -->
+                <div id="car-fields" class="conditional-section">
+                    <div class="form-group">
+                        <label style="color: var(--accent); margin-bottom: 15px;">Vehicle Details (Optional)</label>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+                            <input type="text" id="car-make" placeholder="Make (e.g. Honda)">
+                            <input type="text" id="car-model" placeholder="Model (e.g. Civic)">
+                            <input type="text" id="car-year" placeholder="Year (e.g. 2020)">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Audio Components to Install (Checklist)</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label"><input type="checkbox" id="comp-head"> Head Unit / Radio</label>
+                            <label class="checkbox-label"><input type="checkbox" id="comp-speakers"> Door/Deck Speakers</label>
+                            <label class="checkbox-label"><input type="checkbox" id="comp-sub"> Subwoofer</label>
+                            <label class="checkbox-label"><input type="checkbox" id="comp-amp"> Amplifier</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="source-equipment"> I need Omar to source the hardware/equipment for me
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="project-notes">Describe Your Needs, Wants & End Result</label>
+                    <textarea id="project-notes" rows="5" required placeholder="Please outline the specific details, expectations, and goals of your project..."></textarea>
+                </div>
+
+                <div class="estimate-box" id="estimate-display" style="display: none;">
+                    <div class="estimate-title">Project Estimation</div>
+                    <div id="estimate-content" class="estimate-value">$0.00</div>
+                </div>
+
+                <button type="submit">Submit Request For Quote</button>
+            </form>
+        </div>
+
+        <div id="success-message">
+            <h2>Submission Success!</h2>
+            <p>Thank you for reaching out to Omar’s Audio Services.</p>
+            <p>Your request details have been processed internally through the site.</p>
+            <p class="timeframe">We will review your project parameters and get back to you within 72 hours (excluding weekends).</p>
+        </div>
+    </div>
+
+    <script>
+        function handleServiceChange() {
+            const service = document.getElementById('service-type').value;
+            
+            // Hide all first
+            document.getElementById('music-fields').style.display = 'none';
+            document.getElementById('car-fields').style.display = 'none';
+            document.getElementById('estimate-display').style.display = 'none';
+
+            // Reset inputs where valid
+            if (service === 'music-production') {
+                document.getElementById('music-fields').style.display = 'block';
+                document.getElementById('estimate-display').style.display = 'block';
+                calculateEstimate();
+            } else if (service === 'car-install') {
+                document.getElementById('car-fields').style.display = 'block';
+                document.getElementById('estimate-display').style.display = 'block';
+                calculateEstimate();
+            } else if (service === 'venue-install') {
+                document.getElementById('estimate-display').style.display = 'block';
+                calculateEstimate();
+            }
+        }
+
+        function calculateEstimate() {
+            const service = document.getElementById('service-type').value;
+            const content = document.getElementById('estimate-content');
+
+            if (service === 'music-production') {
+                const tracks = parseInt(document.getElementById('track-count').value) || 0;
+                const turnaround = document.getElementById('turnaround').value;
+
+                if (tracks > 0 && tracks < 10) {
+                    let basePrice = 100;
+                    if (turnaround === 'rush-week') {
+                        basePrice *= 1.30;
+                    } else if (turnaround === 'rush-express') {
+                        basePrice *= 1.50;
+                    }
+                    content.className = "estimate-value";
+                    content.innerHTML = `$${basePrice.toFixed(2)}`;
+                } else if (tracks >= 10) {
+                    content.className = "estimate-notice";
+                    content.innerHTML = "Custom Quote Required<br><span style='font-size:0.85rem; font-weight:normal; color:var(--text-muted);'>Sessions with 10+ tracks require manual planning</span>";
+                } else {
+                    content.className = "estimate-notice";
+                    content.innerHTML = "Please enter track count";
+                }
+            } else if (service === 'car-install' || service === 'venue-install') {
+                content.className = "estimate-notice";
+                content.innerHTML = "Custom Quote Required<br><span style='font-size:0.85rem; font-weight:normal; color:var(--text-muted);'>Hardware installation jobs are scoped manually</span>";
+            }
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            // Seamless transition to success block
+            document.getElementById('form-container').style.display = 'none';
+            document.getElementById('success-message').style.display = 'block';
+            
+            // Scroll container smoothly to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
